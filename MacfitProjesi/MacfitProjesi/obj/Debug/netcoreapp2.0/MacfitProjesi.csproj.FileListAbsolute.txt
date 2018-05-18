@@ -1,0 +1,11 @@
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\bin\Debug\netcoreapp2.0\MacfitProjesi.deps.json
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\bin\Debug\netcoreapp2.0\MacfitProjesi.runtimeconfig.json
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\bin\Debug\netcoreapp2.0\MacfitProjesi.runtimeconfig.dev.json
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\bin\Debug\netcoreapp2.0\MacfitProjesi.dll
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\bin\Debug\netcoreapp2.0\MacfitProjesi.pdb
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.csprojResolveAssemblyReference.cache
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.csproj.CoreCompileInputs.cache
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.AssemblyInfoInputs.cache
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.AssemblyInfo.cs
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.dll
+C:\Users\berdin123\source\repos\MacfitProjesi\MacfitProjesi\obj\Debug\netcoreapp2.0\MacfitProjesi.pdb

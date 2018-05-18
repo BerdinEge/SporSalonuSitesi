@@ -1,0 +1,44 @@
+﻿body {
+    background-color: #99ddff;
+}
+
+@media (max-width: 2000px) {
+    h3 {
+        font-size: 65px;
+        margin-bottom: 17%;
+    }
+}
+
+@media (max-width: 1025px) {
+    h3 {
+        font-size: 45px;
+        margin-bottom: 17%;
+    }
+}
+
+@media (max-width: 768px) {
+    h3 {
+        font-size: 25px;
+        margin-bottom: 14%;
+    }
+}
+
+@media (max-width: 425px) {
+    h3 {
+        font-size: 20px;
+        margin-bottom: 10%;
+    }
+}
+
+
+#footer_üst {
+    background-color: #424242;
+    color: floralwhite;
+    height: 200px;
+}
+
+#footer_alt {
+    background-color: #212121;
+    height: 50px;
+    color: floralwhite;
+}
