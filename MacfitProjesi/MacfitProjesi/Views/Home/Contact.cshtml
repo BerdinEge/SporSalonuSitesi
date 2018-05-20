@@ -1,17 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Iletisim";
+    ViewData["Title"] = "Bize Ulaşın";
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
+
+<address style="font-size:16px;">
+    Kazım Dirik Mahallesi <br />
+    367/6 Sokak No: 3 Ve 5 ( Forum Bornova Yanı ) Bornova İzmir<br />
+    <abbr title="Phone">No:</abbr>
     425.555.0100
 </address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+<address style="font-size:16px;">
+    <strong>Support:</strong> <a href="mailto:Support@example.com">destek@iletisim.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">menejer@iletisim.com</a>
 </address>
+
+
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+<script>
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(38.408742, 27.220850),
+            zoom: 10,
+
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-t4MQ7ii3psqu20BZ5mBOS3SPiTwKIs4&callback=myMap"></script>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->

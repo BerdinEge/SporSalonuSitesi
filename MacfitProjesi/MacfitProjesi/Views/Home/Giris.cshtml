@@ -13,20 +13,28 @@
     
 
     <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="uname"><b>Kullanıcı adı</b></label>
+        <div>
+            <input type="text" placeholder="Kullanıcı adınızı girin" name="uname" required style="width:85%;">
+        </div>
+        
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <label for="psw"><b>Şifre</b></label>
+        <div>
+            <input type="password" placeholder="Şifrenizi girin" name="psw" required style="width:85%;">
+        </div>
 
-        <button type="submit">Login</button>
-        <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
+        <button type="submit" style="width:85%;">Login</button>
+        <div>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Beni hatırla
+            </label>
+        </div>
+        
     </div>
 
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
+    <div class="container" style="background-color:#f1f1f1; width:85%; margin-right:13%;">
+        <button type="button" class="cancelbtn">İptal</button>
+        <span class="psw"><a href="#">Şifremi unuttum</a></span>
     </div>
 </form>
