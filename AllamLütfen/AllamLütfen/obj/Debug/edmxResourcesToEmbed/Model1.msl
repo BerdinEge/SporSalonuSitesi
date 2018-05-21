@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MacFitModelStoreContainer" CdmEntityContainer="MacFitEntities">
+    <EntitySetMapping Name="Egitmen">
+      <EntityTypeMapping TypeName="MacFitModel.Egitmen">
+        <MappingFragment StoreEntitySet="Egitmen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kurs">
+      <EntityTypeMapping TypeName="MacFitModel.Kurs">
+        <MappingFragment StoreEntitySet="Kurs">
+          <ScalarProperty Name="KursId" ColumnName="KursId" />
+          <ScalarProperty Name="EgitmenId" ColumnName="EgitmenId" />
+          <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location">
+      <EntityTypeMapping TypeName="MacFitModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+          <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="MacFitModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MacFitModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Üye_Kurs" TypeName="MacFitModel.Üye_Kurs" StoreEntitySet="Üye_Kurs">
+      <EndProperty Name="Kurs">
+        <ScalarProperty Name="KursId" ColumnName="CourseId" />
+      </EndProperty>
+      <EndProperty Name="Member">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="Get_MemberById" FunctionName="MacFitModel.Store.Get_MemberById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MacFitModel.Get_MemberById_Result">
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+          <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+          <ScalarProperty Name="Egitmen" ColumnName="Egitmen" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+          <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_user" FunctionName="MacFitModel.Store.Get_user">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MacFitModel.Get_user_Result">
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+          <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+          <ScalarProperty Name="Egitmen" ColumnName="Egitmen" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+          <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_Instructors" FunctionName="MacFitModel.Store.Get_Instructors">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MacFitModel.Get_Instructors_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_User_login" FunctionName="MacFitModel.Store.Get_User_login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MacFitModel.Get_User_login_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+          <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Uye_Kayıt" FunctionName="MacFitModel.Store.Uye_Kayıt" />
+  </EntityContainerMapping>
+</Mapping>
