@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MacFitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Egitmen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ad_Soyad" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="LocationId" Type="int" />
+        </EntityType>
+        <EntityType Name="Kurs">
+          <Key>
+            <PropertyRef Name="KursId" />
+          </Key>
+          <Property Name="KursId" Type="int" Nullable="false" />
+          <Property Name="EgitmenId" Type="int" Nullable="false" />
+          <Property Name="Kurs_Icerik" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Sehir" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ilce" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="60" />
+          <Property Name="Tel" Type="nchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ad_Soyad" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="LocationId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Üye_Kurs">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Egitmen__Locatio__6E01572D">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Egitmen">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kurs__EgitmenId__66603565">
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="1" />
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kurs">
+              <PropertyRef Name="EgitmenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__Location__6EF57B66">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Member">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="1" />
+          <End Role="Üye_Kurs" Type="Self.Üye_Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurs">
+              <PropertyRef Name="KursId" />
+            </Principal>
+            <Dependent Role="Üye_Kurs">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Course">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Üye_Kurs" Type="Self.Üye_Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Üye_Kurs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Get_Instructors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_MemberById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Get_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_User_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Uye_Kayıt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Ad_Soyad" Type="nvarchar" Mode="In" />
+          <Parameter Name="Dogum_Tarihi" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="LocationAdress" Type="nvarchar" Mode="In" />
+          <Parameter Name="LocationSehir" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MacFitModelStoreContainer">
+          <EntitySet Name="Egitmen" EntityType="Self.Egitmen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kurs" EntityType="Self.Kurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Üye_Kurs" EntityType="Self.Üye_Kurs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Egitmen__Locatio__6E01572D" Association="Self.FK__Egitmen__Locatio__6E01572D">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Egitmen" EntitySet="Egitmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kurs__EgitmenId__66603565" Association="Self.FK__Kurs__EgitmenId__66603565">
+            <End Role="Egitmen" EntitySet="Egitmen" />
+            <End Role="Kurs" EntitySet="Kurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__Location__6EF57B66" Association="Self.FK__Member__Location__6EF57B66">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Member" Association="Self.FK_Course_Member">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="Üye_Kurs" EntitySet="Üye_Kurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Course" Association="Self.FK_Member_Course">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Üye_Kurs" EntitySet="Üye_Kurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MacFitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Egitmen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ad_Soyad" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Egitmen__Locatio__6E01572D" FromRole="Egitmen" ToRole="Location" />
+          <NavigationProperty Name="Kurs" Relationship="Self.FK__Kurs__EgitmenId__66603565" FromRole="Egitmen" ToRole="Kurs" />
+        </EntityType>
+        <EntityType Name="Kurs">
+          <Key>
+            <PropertyRef Name="KursId" />
+          </Key>
+          <Property Name="KursId" Type="Int32" Nullable="false" />
+          <Property Name="EgitmenId" Type="Int32" Nullable="false" />
+          <Property Name="Kurs_Icerik" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Egitmen" Relationship="Self.FK__Kurs__EgitmenId__66603565" FromRole="Kurs" ToRole="Egitmen" />
+          <NavigationProperty Name="Member" Relationship="Self.Üye_Kurs" FromRole="Kurs" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ilce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Egitmen" Relationship="Self.FK__Egitmen__Locatio__6E01572D" FromRole="Location" ToRole="Egitmen" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Member__Location__6EF57B66" FromRole="Location" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ad_Soyad" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Member__Location__6EF57B66" FromRole="Member" ToRole="Location" />
+          <NavigationProperty Name="Kurs" Relationship="Self.Üye_Kurs" FromRole="Member" ToRole="Kurs" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Egitmen__Locatio__6E01572D">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Egitmen">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kurs__EgitmenId__66603565">
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="1" />
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kurs">
+              <PropertyRef Name="EgitmenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__Location__6EF57B66">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Üye_Kurs">
+          <End Role="Kurs" Type="Self.Kurs" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MacFitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Egitmen" EntityType="Self.Egitmen" />
+          <EntitySet Name="Kurs" EntityType="Self.Kurs" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Member" EntityType="Self.Member" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__Egitmen__Locatio__6E01572D" Association="Self.FK__Egitmen__Locatio__6E01572D">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Egitmen" EntitySet="Egitmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kurs__EgitmenId__66603565" Association="Self.FK__Kurs__EgitmenId__66603565">
+            <End Role="Egitmen" EntitySet="Egitmen" />
+            <End Role="Kurs" EntitySet="Kurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__Location__6EF57B66" Association="Self.FK__Member__Location__6EF57B66">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="Üye_Kurs" Association="Self.Üye_Kurs">
+            <End Role="Kurs" EntitySet="Kurs" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <FunctionImport Name="Get_MemberById" ReturnType="Collection(MacFitModel.Get_MemberById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_user" ReturnType="Collection(MacFitModel.Get_user_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Instructors" ReturnType="Collection(MacFitModel.Get_Instructors_Result)" />
+          <FunctionImport Name="Get_User_login" ReturnType="Collection(MacFitModel.Get_User_login_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Uye_Kayıt">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ad_Soyad" Mode="In" Type="String" />
+            <Parameter Name="Dogum_Tarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="LocationAdress" Mode="In" Type="String" />
+            <Parameter Name="LocationSehir" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Get_MemberById_Result">
+          <Property Type="String" Name="Ad_Soyad" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="Dogum_Tarihi" Nullable="false" />
+          <Property Type="String" Name="Kurs_Icerik" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Egitmen" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Sehir" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ilce" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Adres" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="14" />
+        </ComplexType>
+        <ComplexType Name="Get_user_Result">
+          <Property Type="String" Name="Ad_Soyad" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="Dogum_Tarihi" Nullable="false" />
+          <Property Type="String" Name="Kurs_Icerik" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Egitmen" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Sehir" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ilce" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Adres" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="14" />
+        </ComplexType>
+        <ComplexType Name="Get_Instructors_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Ad_Soyad" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="Dogum_Tarihi" Nullable="false" />
+          <Property Type="Int32" Name="LocationId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Get_User_login_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Ad_Soyad" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="Dogum_Tarihi" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="Binary" Name="Password" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="LocationId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MacFitModelStoreContainer" CdmEntityContainer="MacFitEntities">
+          <EntitySetMapping Name="Egitmen">
+            <EntityTypeMapping TypeName="MacFitModel.Egitmen">
+              <MappingFragment StoreEntitySet="Egitmen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kurs">
+            <EntityTypeMapping TypeName="MacFitModel.Kurs">
+              <MappingFragment StoreEntitySet="Kurs">
+                <ScalarProperty Name="KursId" ColumnName="KursId" />
+                <ScalarProperty Name="EgitmenId" ColumnName="EgitmenId" />
+                <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="MacFitModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+                <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="MacFitModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MacFitModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Üye_Kurs" TypeName="MacFitModel.Üye_Kurs" StoreEntitySet="Üye_Kurs">
+            <EndProperty Name="Kurs">
+              <ScalarProperty Name="KursId" ColumnName="CourseId" />
+            </EndProperty>
+            <EndProperty Name="Member">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Get_MemberById" FunctionName="MacFitModel.Store.Get_MemberById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MacFitModel.Get_MemberById_Result">
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+                <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+                <ScalarProperty Name="Egitmen" ColumnName="Egitmen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+                <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_user" FunctionName="MacFitModel.Store.Get_user">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MacFitModel.Get_user_Result">
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+                <ScalarProperty Name="Kurs_Icerik" ColumnName="Kurs_Icerik" />
+                <ScalarProperty Name="Egitmen" ColumnName="Egitmen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+                <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Instructors" FunctionName="MacFitModel.Store.Get_Instructors">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MacFitModel.Get_Instructors_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_User_login" FunctionName="MacFitModel.Store.Get_User_login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MacFitModel.Get_User_login_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad_Soyad" />
+                <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Uye_Kayıt" FunctionName="MacFitModel.Store.Uye_Kayıt" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

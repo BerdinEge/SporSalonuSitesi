@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41f80c67f89c47b48b64904ec5d6a4a5" Name="Diagram1">
+        <EntityTypeShape EntityType="MacFitModel.Egitmen" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MacFitModel.Kurs" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MacFitModel.Location" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MacFitModel.Member" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MacFitModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="MacFitModel.FK__Egitmen__Locatio__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="MacFitModel.FK__Kurs__EgitmenId__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="MacFitModel.FK__Member__Location__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="MacFitModel.Üye_Kurs" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
